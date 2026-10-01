@@ -1,17 +1,17 @@
 // RUN: gcc -g -O0 sizeof.c -o sizeof && ./sizeof
 //
 // GDB: gdb ./sizeof
-//   (gdb) break 32            // строка с return: все переменные уже заданы
+//   (gdb) break 32            // line with return: all variables are set already
 //   (gdb) run
-//   (gdb) info locals         // все локальные переменные
-//   (gdb) p sizeof(c)         // gdb тоже умеет считать sizeof
+//   (gdb) info locals         // all local variables
+//   (gdb) p sizeof(c)         // gdb can execute some C-expressions: sizeof
 //   (gdb) p sizeof(d)
-//   (gdb) p sizeof(arr)       // 16: весь массив
-//   (gdb) p sizeof(p)         // 8: только указатель
-//   (gdb) ptype arr           // тип переменной: int [4]
+//   (gdb) p sizeof(arr)       // 16: whole array
+//   (gdb) p sizeof(p)         // 8: only the pointer
+//   (gdb) ptype arr           // var type: int [4]
 //   (gdb) ptype p             // int *
-//   (gdb) x/4dw arr           // 4 слова (w = 4 байта) в десятичном виде
-//   (gdb) x/8xb &d            // 8 байт double в hex
+//   (gdb) x/4dw arr           // 4 words (w = 4 bytes) as decimal
+//   (gdb) x/8xb &d            // 8 bytes double в hex
 //   (gdb) continue
 
 #include <stdio.h>

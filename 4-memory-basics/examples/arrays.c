@@ -1,17 +1,17 @@
 // RUN: gcc -g -O0 arrays.c -o arrays && ./arrays
 //
 // GDB: gdb ./arrays
-//   (gdb) break 29 if i == 2  // условная точка останова внутри цикла
+//   (gdb) break 29 if i == 2  // set conditional breakpoint inside of the loop
 //   (gdb) run
-//   (gdb) p a                 // весь массив: {10, 20, 30, 40, 50}
-//   (gdb) p &a[0]             // адрес начала
-//   (gdb) p a + i             // адрес i-го элемента через арифметику
-//   (gdb) p &a[i]             // то же самое
-//   (gdb) p *(a + i)          // значение: 30
-//   (gdb) p a[i]              // то же самое
-//   (gdb) x/5dw a             // весь массив в памяти: 5 слов по 4 байта
-//   (gdb) x/5xw a             // то же в hex
-//   (gdb) display i           // печатать i после каждого шага
+//   (gdb) p a                 // print array: {10, 20, 30, 40, 50}
+//   (gdb) p &a[0]             // start address
+//   (gdb) p a + i             // ith elemnt address
+//   (gdb) p &a[i]             // same
+//   (gdb) p *(a + i)          // value of ith elemnt: 30
+//   (gdb) p a[i]              // same
+//   (gdb) x/5dw a             // memory examine of the array
+//   (gdb) x/5xw a             // same in hex
+//   (gdb) display i           // print i after each step
 //   (gdb) next
 //   (gdb) next
 //   (gdb) continue
@@ -27,7 +27,9 @@ int main(void) {
 
     for (int i = 0; i < 5; i++) {
         printf("a + %d = %p   &a[%d] = %p   a[%d] = %d\n",
-               i, (void *)(a + i), i, (void *)&a[i], i, *(a + i));
+               i, (void *)(a + i), 
+               i, (void *)&a[i], 
+               i, *(a + i));
     }
     return 0;
 }
